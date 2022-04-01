@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aduga\\CMPS 358 P7\\p7_C00231110-C00439696\\p7_C00231110-C00439696\\p7_C00231110-C00439696.csproj": {}
+    "/Users/cameronwashington/Documents/GitHub/CMPS-358-Project-7/p7_C00231110-C00439696/p7_C00231110-C00439696/p7_C00231110-C00439696.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aduga\\CMPS 358 P7\\p7_C00231110-C00439696\\p7_C00231110-C00439696\\p7_C00231110-C00439696.csproj": {
+    "/Users/cameronwashington/Documents/GitHub/CMPS-358-Project-7/p7_C00231110-C00439696/p7_C00231110-C00439696/p7_C00231110-C00439696.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aduga\\CMPS 358 P7\\p7_C00231110-C00439696\\p7_C00231110-C00439696\\p7_C00231110-C00439696.csproj",
+        "projectUniqueName": "/Users/cameronwashington/Documents/GitHub/CMPS-358-Project-7/p7_C00231110-C00439696/p7_C00231110-C00439696/p7_C00231110-C00439696.csproj",
         "projectName": "p7_C00231110-C00439696",
-        "projectPath": "C:\\Users\\aduga\\CMPS 358 P7\\p7_C00231110-C00439696\\p7_C00231110-C00439696\\p7_C00231110-C00439696.csproj",
-        "packagesPath": "C:\\Users\\aduga\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aduga\\CMPS 358 P7\\p7_C00231110-C00439696\\p7_C00231110-C00439696\\obj\\",
+        "projectPath": "/Users/cameronwashington/Documents/GitHub/CMPS-358-Project-7/p7_C00231110-C00439696/p7_C00231110-C00439696/p7_C00231110-C00439696.csproj",
+        "packagesPath": "/Users/cameronwashington/.nuget/packages/",
+        "outputPath": "/Users/cameronwashington/Documents/GitHub/CMPS-358-Project-7/p7_C00231110-C00439696/p7_C00231110-C00439696/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\aduga\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/cameronwashington/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -37,6 +37,22 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -52,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }
