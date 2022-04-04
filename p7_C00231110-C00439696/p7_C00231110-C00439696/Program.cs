@@ -3,11 +3,15 @@
 // CMPS 358
 // Project: p7
 
+using System.Linq;
+using System.Text;
+
+// Display menu
 PrintMenu();
-Console.Write("Enter the number of your choice: ");
 var input = Console.ReadLine();
 Console.WriteLine();
 
+// Menu loop
 while (input != "6")
 {
     if (input == "1")
@@ -25,17 +29,34 @@ while (input != "6")
         var country = Console.ReadLine();
         Console.WriteLine();
         ListSupplierInfo(country);
+    } else if (input == "4")
+    {
+        Console.Write("Enter a supplier: ");
+        var supplier = Console.ReadLine();
+        Console.WriteLine();
+        isNotDiscontinued(supplier);
+    } else if (input == "5")
+    {
+        Console.Write("Enter an order number: ");
+        var order = Console.ReadLine();
+        Console.WriteLine();
+        Order(order);
     } else if (input == "6")
     {
         continue;
     }
+    else
+    {
+        Console.WriteLine("Invalid input, try again");
+        Console.WriteLine();
+    }
 
     PrintMenu();
-    Console.Write("Enter the number of your choice: ");
     input = Console.ReadLine();
     Console.WriteLine();
 }
 
+// Display menu method
 static void PrintMenu()
 {
     Console.WriteLine("Select an option below to traverse the database:");
@@ -45,8 +66,10 @@ static void PrintMenu()
     Console.WriteLine("4. List the non-discontinued products and the information associated with them");
     Console.WriteLine("5. List the order for a customer from a given order number");
     Console.WriteLine("6. Quit");
+    Console.Write("Enter the number of your choice: ");
 }
 
+// 3. a) Check database for discontinued items
 static void isDiscontinued()
 {
     using var db = new smallbusiness.smallbusiness();
@@ -65,6 +88,7 @@ static void isDiscontinued()
     }
 }
 
+// 3. b) List customer info based on country
 static void ListCustomersInfo(string country)
 {
     using var db = new smallbusiness.smallbusiness();
@@ -86,6 +110,7 @@ static void ListCustomersInfo(string country)
     }
 }
 
+// 3. c) List supplier info based on country
 static void ListSupplierInfo(string country)
 {
     using var db = new smallbusiness.smallbusiness();
@@ -107,9 +132,67 @@ static void ListSupplierInfo(string country)
     }
 }
 
+// 3. d) List supported products based on supplier
+static void isNotDiscontinued(string supplier)
+{
+    using var db = new smallbusiness.smallbusiness();
+    {
+        var results =
+            from ss in db.Suppliers
+            join sp in db.Products
+                on ss.Id equals sp.SupplierId
+            where sp.IsDiscontinued.ToString() != "1" && ss.CompanyName == supplier
+            select new {ss.CompanyName, sp.ProductName, sp.UnitPrice, sp.Package};
+        
+        if (results.Count() == 0)
+        {
+            Console.WriteLine($"No supported products from {supplier}.");
+            return;
+        }
+        
+        Console.WriteLine($"Products supported by {supplier}:");
+        foreach (var x in results) 
+            Console.WriteLine(" { CompanyName = " + x.CompanyName + ", ProductName = " + x.ProductName + ", UnitPrice = " 
+                              + Encoding.UTF8.GetString(x.UnitPrice) + ", Package = " + x.Package + " } ");
+        Console.WriteLine();
+    }
+}
+
+// 3. e) List order items based on order number
+static void Order(string order)
+{
+    using var db = new smallbusiness.smallbusiness();
+    {
+        var results =
+            from ot in db.Orders
+            join co in db.Customers
+                on ot.CustomerId equals co.Id
+                join od in db.OrderItems
+                on ot.Id equals od.OrderId
+            join pi in db.Products
+                on od.ProductId equals pi.Id
+            where ot.OrderNumber == order
+            select new {co.FirstName, co.LastName, pi.ProductName, od.UnitPrice, od.Quantity, ot.TotalAmount};
+
+        if (results.Count() == 0)
+        {
+            Console.WriteLine($"No items in order {order}.");
+            return;
+        }
+        
+        Console.WriteLine($"Items in order {order}:");
+        foreach (var y in results)
+        {
+            var s = Encoding.UTF8.GetString(y.UnitPrice);
+            var d = double.Parse(s);
+            Console.WriteLine(" { FirstName = " + y.FirstName + ", LastName = " + y.LastName
+                              + ", ProductName = " + y.ProductName + ", UnitPrice = " + s + ", Quantity = " 
+                              + y.Quantity + ", Subtotal = " + (d * y.Quantity) + ", TotalAmount = " 
+                              + Encoding.UTF8.GetString(y.TotalAmount) + " } ");
+        }
+        Console.WriteLine();
+    }
+}
+
+// Exit menu
 Console.WriteLine("You have exited the database");
-/*
-isDiscontinued();
-ListCustomersInfo("Canada");
-ListSupplierInfo("USA");
-*/
