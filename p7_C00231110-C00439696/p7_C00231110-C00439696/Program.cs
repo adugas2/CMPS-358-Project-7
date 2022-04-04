@@ -3,6 +3,50 @@
 // CMPS 358
 // Project: p7
 
+PrintMenu();
+Console.Write("Enter the number of your choice: ");
+var input = Console.ReadLine();
+Console.WriteLine();
+
+while (input != "6")
+{
+    if (input == "1")
+    {
+        isDiscontinued();
+    } else if (input == "2")
+    {
+        Console.Write("Enter a country: ");
+        var country = Console.ReadLine();
+        Console.WriteLine();
+        ListCustomersInfo(country);
+    } else if (input == "3")
+    {
+        Console.Write("Enter a country: ");
+        var country = Console.ReadLine();
+        Console.WriteLine();
+        ListSupplierInfo(country);
+    } else if (input == "6")
+    {
+        continue;
+    }
+
+    PrintMenu();
+    Console.Write("Enter the number of your choice: ");
+    input = Console.ReadLine();
+    Console.WriteLine();
+}
+
+static void PrintMenu()
+{
+    Console.WriteLine("Select an option below to traverse the database:");
+    Console.WriteLine("1. List the discontinued products");
+    Console.WriteLine("2. List the customer information from a given country");
+    Console.WriteLine("3. List the supplier information from a given country");
+    Console.WriteLine("4. List the non-discontinued products and the information associated with them");
+    Console.WriteLine("5. List the order for a customer from a given order number");
+    Console.WriteLine("6. Quit");
+}
+
 static void isDiscontinued()
 {
     using var db = new smallbusiness.smallbusiness();
@@ -63,6 +107,9 @@ static void ListSupplierInfo(string country)
     }
 }
 
+Console.WriteLine("You have exited the database");
+/*
 isDiscontinued();
 ListCustomersInfo("Canada");
 ListSupplierInfo("USA");
+*/
