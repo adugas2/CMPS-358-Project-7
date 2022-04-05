@@ -167,7 +167,7 @@ static void Order(string order)
             from ot in db.Orders
             join co in db.Customers
                 on ot.CustomerId equals co.Id
-                join od in db.OrderItems
+            join od in db.OrderItems
                 on ot.Id equals od.OrderId
             join pi in db.Products
                 on od.ProductId equals pi.Id
